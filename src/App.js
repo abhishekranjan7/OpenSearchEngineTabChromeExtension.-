@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import "./App.css";
 
-function App() {
+const data=[
+  {
+    name:"search engines",
+    url:["https://www.google.com","https://www.bing.com"]
+  }
+]
+
+function App()
+{
+  const [lists, setLists]=useState(data);
+
+  const openTabs=(url)=>{
+    for(const link of url)
+    {
+      window.open(link,"blank");
+    }
+
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <h3>Choose your App List</h3>
+      <div className='lists'>
+        {lists && lists.map((item)=>{
+          return (
+            <button className='button' onClick={()=>{openTabs(item.url)}}>{item.name}</button>
+          )
+        })}
+        
+      </div>
     </div>
   );
 }
